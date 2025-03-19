@@ -1,0 +1,56 @@
+### 
+POST http://localhost:5000/api/ingredients/
+Content-Type: application/json
+
+{
+  "name": "Tỏi",
+  "stock": 5,
+  "unit": "kg",
+  "threshold": 10,
+  "image": "https://example.com/images/garlic.jpg"
+}
+
+###
+GET http://localhost:5000/api/ingredients/low-stock
+
+###
+DELETE http://localhost:5000/api/ingredients/67da24ae08a2ddbb1930379b
+
+###
+POST http://localhost:5000/api/inventory-log/
+Content-Type: application/json
+
+{
+  "type": "import",
+  "items": [
+    {
+      "ingredientId": "67da23c408a2ddbb19303786",  
+      "name": "Cà chua",
+      "quantity": 50,
+      "unit": "kg",
+      "totalCost": 250  
+    },
+    {
+      "ingredientId": "67da23e608a2ddbb1930378a",  
+      "name": "Khoai tây",
+      "quantity": 100,
+      "unit": "kg",
+      "totalCost": 300  
+    },
+    {
+      "ingredientId": "67da240a08a2ddbb1930378e",  
+      "name": "Cà rốt",
+      "quantity": 30,
+      "unit": "kg",
+      "totalCost": 150 
+    },
+    {
+      "name": "Bí đỏ",
+      "quantity": 20,
+      "unit": "kg",
+      "totalCost": 100  
+    }
+  ],
+  "totalAmount": 800,
+  "date": "2025-03-19T12:00:00.000Z"
+}
