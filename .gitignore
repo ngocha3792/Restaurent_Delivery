@@ -15,3 +15,5 @@ frontend/build/
 .idea/
 .vscode/
 
+#Các file json (dữ liệu)
+*.json
