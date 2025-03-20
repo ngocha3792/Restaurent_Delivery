@@ -1,0 +1,17 @@
+# Các thư mục node_modules
+backend/node_modules/
+frontend/node_modules/
+
+# Thư mục build của frontend
+frontend/build/
+
+# Các file log
+*.log
+
+# Các file môi trường (ví dụ: .env)
+.env
+
+# Các file cấu hình của IDE (VSCode, IntelliJ...)
+.idea/
+.vscode/
+
