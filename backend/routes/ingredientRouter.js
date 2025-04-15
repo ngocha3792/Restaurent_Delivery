@@ -10,5 +10,9 @@ router.get("/low-stock", ingredientController.getLowStockIngredients);
 
 // Xóa nguyên liệu
 router.delete("/:ingredientId", ingredientController.deleteIngredient);
+router.put("/:id", ingredientController.updateIngredientInfo)
+router.get("/:id", ingredientController.getIngredientById)
+router.get("/", ingredientController.getAllIngredients)
+router.get("/:ingredientId/history", ingredientController.getIngredientHistory);
 
 module.exports = router;

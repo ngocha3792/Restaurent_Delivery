@@ -11,4 +11,8 @@ router.delete("/:logId", inventoryLogController.deleteInventoryLog);
 // Sửa bản ghi nhập xuất kho
 router.put("/:logId", inventoryLogController.updateInventoryLog);
 
+router.get("/:logId", inventoryLogController.getInventoryLog)
+
+router.get("/", inventoryLogController.getAllInventoryLog)
+
 module.exports = router;

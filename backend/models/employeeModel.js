@@ -1,97 +1,92 @@
 const Employee = require("../schema/employeeSchema")
-const Contract = require("../schema/contractSchema");
-const mongoose = require("mongoose")
 
-
-// Tạo mới một nhân viên cùng với hợp đồng
-const createEmployeeWithContract = async (employeeData, contractData) => {
-  const session = await mongoose.startSession();  
-  session.startTransaction();
-
+const createEmployee = async (employeeData) => {
   try {
-      const newEmployee = new Employee(employeeData);
-      await newEmployee.save({ session }); 
 
-      const contract = new Contract({
-          ...contractData,
-          employeeId: newEmployee._id, 
-      });
-      await contract.save({ session });  
-
-      newEmployee.contract = contract._id;
-      await newEmployee.save({ session });  
-
-      await session.commitTransaction();
-      session.endSession(); 
-
-      return { success: true, employee: newEmployee, contract };
+    const existingEmployee = await Employee.findOne({
+      phoneNumber: employeeData.phoneNumber
+    })
+    if (existingEmployee) {
+      throw new Error("Employee with the same phone number already exists");
+    }
+    const newEmployee = new Employee(employeeData)
+    await newEmployee.save();
+    return {
+      success: true,
+      employee: newEmployee
+    }
   } catch (error) {
-      await session.abortTransaction();
-      session.endSession();
-      return { success: false, message: error.message };
-  }
-}
-  
-
-// Lấy tất cả các nhân viên có hợp đồng đang có hiệu lực
-const getActiveEmployees = async () => {
-  try {
-        const activeContracts = await Contract.find({ status: "active" })
-        const activeEmployeeIds = activeContracts.map(contract => contract.employeeId)
-        const activeEmployees = await Employee.find({ _id: { $in: activeEmployeeIds } })
-        return { success: true, employees: activeEmployees }
-  } catch (error) {
-        return { success: false, message: error.message }
+    return {
+      sucess: false,
+      message: error.message
+    }
   }
 }
 
-// Lấy tất cả nhân viên ở vị trí làm việc cụ thể
-const getEmployeesByPosition = async (position) => {
+const updateEmployee = async (employeeId, updateData) => {
   try {
-    const employees = await Employee.find({ position })
-    return { success: true, employees }
+    const updateEmployee = await Employee.findByIdAndUpdate(employeeId, updateData)
+    return {
+      sucess: true,
+      employee: updateEmployee
+    }
   } catch (error) {
-    return { success: false, message: error.message }
+    return {
+      sucess: false,
+      message: error.message
+    }
   }
 }
 
-// Cập nhật thông tin nhân viên
-const updateEmployeeById = async (employeeId, updateData) => {
-  const session = await mongoose.startSession();  
-  session.startTransaction();
-
+const deleteEmployee = async (employeeId) => {
   try {
-      const updatedEmployee = await Employee.findByIdAndUpdate(employeeId, updateData, { new: true, session }); 
-      await session.commitTransaction();
-      session.endSession();  
-      return { success: true, employee: updatedEmployee };
+    const deleteEmployee = await Employee.findByIdAndDelete(employeeId)
+    return {
+      sucess: true,
+      message: "Xóa nhân viên thành công"
+    }
   } catch (error) {
-      await session.abortTransaction();  
-      session.endSession(); 
-      return { success: false, message: error.message };
+    return {
+      sucess: false,
+      message: error.message
+    }
   }
 }
 
-// Xóa nhân viên
-const deleteEmployeeById = async (employeeId) => {
-  const session = await mongoose.startSession(); 
-  session.startTransaction();
-
+const findEmployee = async (employeeId) => {
   try {
-      const deletedEmployee = await Employee.findByIdAndDelete(employeeId, { session }); 
-      await session.commitTransaction();
-      session.endSession(); 
-      return { success: true, message: "Employee deleted successfully", employee: deletedEmployee };
-  } catch (error) {
-      await session.abortTransaction(); 
-      session.endSession(); 
-      return { success: false, message: error.message };
+    const employee = await Employee.findById(employeeId).populate("userId contractId attendances leaveRequests")
+    return {
+      sucess: true,
+      employee: employee
+    }
+  } catch (error){
+    return {
+      sucess: false,
+      message: error.message
+    }
   }
-};
+}
+
+const getAllEmployee = async () => {
+  try {
+    const employees = await Employee.find().populate("userId, contractId attendances leaveRequests")
+    return {
+      success: true,
+      employees: employees
+    }
+  } catch (error) {
+    return {
+      sucess: false,
+      message: error.message
+    }
+  }
+}
+
 module.exports = {
-  createEmployeeWithContract,
-  getActiveEmployees,
-  getEmployeesByPosition,
-  updateEmployeeById,
-  deleteEmployeeById
+  createEmployee,
+  updateEmployee,
+  deleteEmployee,
+  findEmployee,
+  getAllEmployee
 }

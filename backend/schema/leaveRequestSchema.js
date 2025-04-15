@@ -7,6 +7,9 @@ const leaveRequestSchema = new mongoose.Schema({
     endTime: { type: Date, required: true },
     reason: { type: String, required: true },
     status: { type: String, enum: ["Pending", "Approved", "Rejected"], default: "Pending" },
+    approverId: { type: mongoose.Schema.Types.ObjectId, ref: "Employee" },
+    reasonReject: {type:String},
+    duration: { type: Number },
     createdAt: { type: Date, default: Date.now }
   });
   

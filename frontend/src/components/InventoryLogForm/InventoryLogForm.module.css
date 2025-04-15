@@ -1,0 +1,159 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formRow {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 150px;
+}
+
+.formGroup label {
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #444;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.formGroup input:disabled,
+.formGroup select:disabled,
+.formGroup textarea:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+.itemsFieldset {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.itemsFieldset legend {
+    font-weight: 600;
+    padding: 0 10px;
+    color: #555;
+}
+
+.itemRow {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.itemRow input {
+    flex-grow: 1;
+    min-width: 80px;
+}
+
+.itemName {
+    flex-basis: 200px;
+}
+
+.itemQuantity {
+    flex-basis: 80px;
+}
+
+.itemUnit {
+    flex-basis: 80px;
+}
+
+.itemCost {
+    flex-basis: 120px;
+}
+
+
+.removeItemBtn,
+.addItemBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease;
+}
+
+.removeItemBtn {
+    color: #dc3545;
+    font-size: 0.9rem;
+}
+
+.removeItemBtn:hover {
+    color: #a71d2a;
+}
+
+.removeItemBtn:disabled {
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+.addItemBtn {
+    margin-top: 10px;
+    color: #007bff;
+    font-size: 0.9rem;
+    gap: 5px;
+    background-color: #e7f3ff;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.addItemBtn:hover {
+    color: #0056b3;
+    background-color: #cfe2ff;
+}
+
+.addItemBtn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.errorMessage {
+    color: #dc3545;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.submitButton {
+    padding: 12px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+    margin-top: 10px;
+}
+
+.submitButton:hover {
+    background-color: #218838;
+}
+
+.submitButton:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.7;
+}

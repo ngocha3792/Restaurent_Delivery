@@ -1,0 +1,99 @@
+.sidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    position: fixed;
+    top: 50px; 
+    left: -250px;
+    height: calc(100vh - 50px);
+    padding-top: 20px;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+    z-index: 999;
+}
+
+.sidebarVisible {
+    left: 0;
+}
+
+.sidebarNav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menuItem {
+    margin-bottom: 2px; 
+}
+
+.menuItemLink {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: background-color 0.2s ease, padding-left 0.2s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.menuItemLink:hover {
+    background-color: #34495e;
+    padding-left: 25px;
+}
+
+.menuIcon {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+    display: inline-block;
+    flex-shrink: 0; 
+}
+
+.submenu {
+    list-style: none;
+    background-color: #34495e;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding: 0;
+    margin: 0;
+}
+
+.submenuOpen {
+    max-height: 500px; 
+    transition: max-height 0.4s ease-in;
+}
+
+.submenuItem a { 
+    display: block;
+    padding: 10px 20px 10px 45px; 
+    font-size: 0.9em;
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: background-color 0.2s ease, padding-left 0.2s ease, color 0.2s ease;
+}
+
+.submenuItem a:hover {
+    background-color: #46627f;
+    color: #ffffff;
+    padding-left: 50px;
+}
+
+.submenuArrow {
+    margin-left: auto;
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+}
+
+.submenuArrowOpen {
+    transform: rotate(180deg);
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        top: 0;
+        height: 100vh;
+        z-index: 1001;
+    }
+}

@@ -1,0 +1,35 @@
+.adminLayout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.adminLayoutContent { 
+    display: flex;
+    flex-grow: 1;
+    margin-top: 50px; 
+    position: relative; 
+}
+
+.adminLayoutContentWrapper {
+    flex-grow: 1; 
+    padding: 20px; 
+    background-color: #f4f7fa; 
+    transition: margin-left 0.3s ease; 
+    overflow-x: hidden;
+}
+
+.contentShifted {
+    @media (min-width: 769px) {
+        margin-left: 250px;
+    }
+}
+
+
+.sidebarOverlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998; display: none; cursor: pointer;
+}
+.sidebarOverlayVisible { display: block; }

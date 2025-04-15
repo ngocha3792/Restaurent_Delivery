@@ -14,7 +14,8 @@ const menuItemSchema = new mongoose.Schema({
     ],
     available: { type: Boolean, default: true }, 
     outOfStock: { type: Boolean, default: false }, 
-    image: {type: String}
+    timeCook: {type: Number, required: true },
+    image: {type: String},
   });
 
 module.exports = mongoose.model("MenuItem",menuItemSchema)

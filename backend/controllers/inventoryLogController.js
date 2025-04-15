@@ -37,7 +37,7 @@ const deleteInventoryLog = async (req, res) => {
     } = req.params;
 
     try {
-        const result = await inventoryLogService.deleteInventoryLog(logId);
+        const result = await InventoryLogModel.deleteInventoryLog(logId);
         if (result.success) {
             return res.status(200).json(result);
         }
@@ -57,13 +57,13 @@ const updateInventoryLog = async (req, res) => {
     const updatedData = req.body;
 
     try {
-        const result = await inventoryLogService.updateInventoryLog(logId, updatedData);
+        const result = await InventoryLogModel.updateInventoryLog(logId, updatedData);
 
         if (!result.success) {
             return res.status(400).json(result);
         }
 
-        const totalAmountResult = await inventoryLogService.calculateTotalAmount(result.log._id);
+        const totalAmountResult = await InventoryLogModel.calculateTotalAmount(result.log._id);
 
         if (!totalAmountResult.success) {
             return res.status(400).json(totalAmountResult);
@@ -82,8 +82,54 @@ const updateInventoryLog = async (req, res) => {
     }
 };
 
+const getInventoryLog = async (req, res) => {
+    const logId = req.params
+    try {
+        const result = await InventoryLogModel.getInventoryLog(logId)
+        if (!result.success){
+            res.status(400).json(result)
+        }
+
+        return res.status(200).json({
+            sucess: true,
+            log: result.log
+        })
+
+    } catch (error){
+        return res.status(500).json({
+            sucess: false,
+            message: error.message
+        })
+    }
+}
+
+const getAllInventoryLog = async (req, res) => {
+    try {
+          const result = await InventoryLogModel.getAllInventoryLog();
+          console.log(result)
+          if (!result.success) {
+            return res.status(400).json({
+              success: false,
+              message: result.message,
+            });
+          }
+      
+          return res.json({
+            success: true,
+            logs: result.logs,
+          });
+        } catch (error) {
+          return res.status(500).json({
+            success: false,
+            message: error.message,
+          });
+    }
+}
+
 module.exports = {
     createAndCalculateInventoryLog,
     updateInventoryLog,
-    deleteInventoryLog
+    deleteInventoryLog,
+    getInventoryLog,
+    getAllInventoryLog
 };

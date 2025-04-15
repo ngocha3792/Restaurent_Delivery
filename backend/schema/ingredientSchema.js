@@ -7,7 +7,6 @@ const ingredientSchema = new mongoose.Schema({
   stock: { type: Number, required: true, default: 0 }, 
   unit: { type: String, required: true }, 
   threshold: { type: Number, default: 5 },
-  image: {type: String}
 });
 
 module.exports = mongoose.model("Ingredient", ingredientSchema);
