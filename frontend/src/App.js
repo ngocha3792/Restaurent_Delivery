@@ -1,4 +1,3 @@
-// src/App.js
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom';
 import AdminLayout from './layouts/AdminLayout';

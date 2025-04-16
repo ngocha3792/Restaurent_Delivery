@@ -16,7 +16,7 @@ function SidebarItem({ item }) {
   };
 
   const linkHref = item.path || '#';
-  const MainElement = hasSubmenu ? 'div' : 'a';
+ 
 
   return (
     <li className={styles.menuItem}>
